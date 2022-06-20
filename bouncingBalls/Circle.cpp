@@ -12,7 +12,6 @@ Circle::Circle() {
     this->speed = 0;
 
     this->gravityVector = HMM_Vec2(0, 0);
-    this->momentum = HMM_Vec2(0, 0);
 }
 
 Circle::Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, int minVelocity, int maxVelocity) {
@@ -29,12 +28,11 @@ Circle::Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, int
     // Get a random speed
     this->speed = (rand() % (maxVelocity - minVelocity)) + minVelocity;;
 
-    // Calculate the initial momentum
-    this->momentum = this->direction * speed;
-
     // Make the circle a random size
     this->size = (rand() % (maxRadius - minRadius)) + minRadius;
 
+    // Calculate the initial momentum
+    this->velocity = this->direction * speed;
 
     // place the circle, keep it away from the edges
     // this should work with this->size*2, but I still get circle on bottom and right edge
@@ -73,8 +71,8 @@ hmm_vec2 Circle::GetGravityVector() {
     return this->gravityVector;
 }
 
-hmm_vec2 Circle::GetMomentum() {
-    return this->momentum;
+hmm_vec2 Circle::GetVelocity() {
+    return this->velocity;
 }
 
 bool Circle::SetPosition(float X, float Y) {
@@ -108,7 +106,7 @@ bool Circle::ResetGravitySpeed() {
     return true;
 }
 
-bool Circle::SetMomentum(hmm_vec2 in) {
-    this->momentum = in;
+bool Circle::SetVelocity (hmm_vec2 in) {
+    this->velocity = in;
     return true;
 }
