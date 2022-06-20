@@ -3,7 +3,7 @@
 class Circle {
 public:
     Circle();
-    Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, int minVelocity, int maxVelocity);
+    Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, unsigned int minVelocity, unsigned int maxVelocity);
     ~Circle();
 
     int             GetSize();

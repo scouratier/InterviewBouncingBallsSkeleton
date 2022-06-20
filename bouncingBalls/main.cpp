@@ -17,14 +17,14 @@ typedef hmm_vec4 vec4;
 typedef hmm_quaternion quat;
 typedef hmm_mat4 mat4;
 
-std::string windowTitle = "Hypixel - Bouncing Balls";
-int windowWidth = 1000;
-int windowHeight = 400;
-int numBalls = 20;
-int minBallRadiusPx = 20;
-int maxBallRadiusPx = 30;
-float minBallVelocityPx = 70;
-float maxBallVelocityPx = 80;
+static const std::string windowTitle = "Hypixel - Bouncing Balls";
+static const int windowWidth = 1000;
+static const int windowHeight = 400;
+static const int numBalls = 20;
+static const int minBallRadiusPx = 20;
+static const int maxBallRadiusPx = 30;
+static const int minBallVelocityPx = 70;
+static const int maxBallVelocityPx = 80;
 
 hmm_vec2 gravity = HMM_Vec2(0, 0);
 
@@ -39,6 +39,11 @@ void randomizeSizes(std::vector<Circle>& allCircles)
     }
 }
 
+/*******************************************************************************************************************/
+/* Inputs:                                                                                                         */
+/* F1: Changes size of circles                                                                                     */
+/* Arrows change gravity towards that direction                                                                    */
+/*******************************************************************************************************************/
 void input(sf::RenderWindow &window, std::vector<Circle>& allCircles) {
     sf::Event event;
 
@@ -56,18 +61,18 @@ void input(sf::RenderWindow &window, std::vector<Circle>& allCircles) {
                     break;
                 case sf::Keyboard::Left:
                     // update UI
-                    gravity.X = gravity.X - 0.001;
+                    gravity.X = gravity.X - 0.001f;
                     break;
                 case sf::Keyboard::Right:
                     // update UI
-                    gravity.X = gravity.X + 0.001;
+                    gravity.X = gravity.X + 0.001f;
                     break;
                 case sf::Keyboard::Up:
                     // update UI
-                    gravity.Y = gravity.Y - 0.001;
+                    gravity.Y = gravity.Y - 0.001f;
                     break;
                 case sf::Keyboard::Down:
-                    gravity.Y = gravity.Y + 0.001;
+                    gravity.Y = gravity.Y + 0.001f;
                     // update UI
                     break;
             default:
@@ -184,8 +189,8 @@ void circleCollision(std::vector<Circle>::iterator currentCircle, std::vector<Ci
             hmm_vec2 C2newVelocity = HMM_Vec2(0, 0);
 
             // This will calculate the new velocities
-            C1newVelocity = (currentCircle->GetVelocity() * (currentCircle->GetSize() - itr->GetSize()) + 2 * (itr->GetSize() * itr->GetVelocity())) / (currentCircle->GetSize() + itr->GetSize());
-            C2newVelocity = (itr->GetVelocity() * (itr->GetSize() - currentCircle->GetSize()) + 2 * (currentCircle->GetSize() * currentCircle->GetVelocity())) / (currentCircle->GetSize() + itr->GetSize());
+            C1newVelocity = (currentCircle->GetVelocity() * static_cast<float>(currentCircle->GetSize() - itr->GetSize()) + 2 * (static_cast<float>(itr->GetSize()) * itr->GetVelocity())) / static_cast<float>(currentCircle->GetSize() + itr->GetSize());
+            C2newVelocity = (itr->GetVelocity() * static_cast<float>(itr->GetSize() - currentCircle->GetSize()) + 2 * (static_cast<float>(currentCircle->GetSize()) * currentCircle->GetVelocity())) / static_cast<float>(currentCircle->GetSize() + itr->GetSize());
 
             // Apply the velocities
             currentCircle->SetVelocity(C1newVelocity);
@@ -248,8 +253,9 @@ void draw(sf::RenderWindow& window,std::vector<Circle> allCircles) {
     std::vector<Circle>::iterator itr;
     for (itr = allCircles.begin(); itr != allCircles.end(); itr++) {
         // move this to a utility function
-        sf::CircleShape shape(itr->GetSize());
-        shape.setFillColor(sf::Color(itr->GetColor().R, itr->GetColor().G, itr->GetColor().B));
+        sf::CircleShape shape(static_cast<float>(itr->GetSize()));
+        shape.setFillColor(sf::Color(static_cast<int>(itr->GetColor().R), static_cast<int>(itr->GetColor().G), static_cast<int>(itr->GetColor().B)));
+        // Move the origin of the circle from top left to center
         shape.setOrigin(shape.getRadius(), shape.getRadius());
         shape.setPosition(itr->GetPosition().X, itr->GetPosition().Y);
         window.draw(shape);
@@ -263,12 +269,15 @@ int main() {
     settings.antialiasingLevel = 8;
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), windowTitle);
     // Seed here for random number in Circle. 
-    srand(time(0));
+    srand(static_cast<int>(time(NULL)));
 
     // Start the time
     sf::Clock clock;
 
+    /****************************/
+    /* Init the data structures */
     // make our vector that will hold the circles
+    /****************************/
     std::vector<Circle> allCircles;
     int i;
     // Fill in the array with Circles
@@ -279,6 +288,9 @@ int main() {
         allCircles.push_back(tempCircle);
     }
 
+    /****************************/
+    /* Main Loop                */
+    /****************************/
     while (window.isOpen()) {
         input(window, allCircles);
         sf::Time elapsed = clock.getElapsedTime();
