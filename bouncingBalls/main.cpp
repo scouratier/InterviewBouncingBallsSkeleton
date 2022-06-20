@@ -28,7 +28,18 @@ float maxBallVelocityPx = 80;
 
 hmm_vec2 gravity = HMM_Vec2(0, 0);
 
-void input(sf::RenderWindow &window) {
+/*******************************************************************************************************************/
+/* Iterate all circles and re-randomize their size                                                                 */
+/*******************************************************************************************************************/
+void randomizeSizes(std::vector<Circle>& allCircles)
+{
+    std::vector<Circle>::iterator itr;
+    for (itr = allCircles.begin(); itr != allCircles.end(); itr++) {
+        itr->RandomSize(minBallRadiusPx, maxBallRadiusPx);
+    }
+}
+
+void input(sf::RenderWindow &window, std::vector<Circle>& allCircles) {
     sf::Event event;
 
     while (window.pollEvent(event)) {
@@ -40,6 +51,8 @@ void input(sf::RenderWindow &window) {
                 case sf::Keyboard::F1:
                     // Randomize mass
                     // Not really sure what this means.
+                    // Loop all circles
+                    randomizeSizes(allCircles);
                     break;
                 case sf::Keyboard::Left:
                     // update UI
@@ -181,6 +194,7 @@ void circleCollision(std::vector<Circle>::iterator currentCircle, std::vector<Ci
             // The balls are now overlapping and should be moved apart
             // If we don't do this, the 2 balls will still be in a collision at the next test
             // and it makes all sorts of weird
+            // and it makes all sorts of weird
             float overlap = (currentCircle->GetSize() + itr->GetSize()) - HMM_Length(deltaBetweenCircles);
             // set new positions
             currentCircle->SetPosition(currentCircle->GetPosition() + HMM_Multiply(HMM_Multiply(HMM_Normalize(deltaBetweenCircles),1), overlap / 2));
@@ -266,7 +280,7 @@ int main() {
     }
 
     while (window.isOpen()) {
-        input(window);
+        input(window, allCircles);
         sf::Time elapsed = clock.getElapsedTime();
         // Added this to have a managed tic rate if I needed it
         // Came in handy to troubleshoot issues. Left it at 0 to run as fast as possible
