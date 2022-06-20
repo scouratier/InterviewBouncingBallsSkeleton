@@ -1,9 +1,9 @@
 Inputs:
-ESC: Closes the window
-UP ARROW: Increase gravity to top edge of the window
-LEFT ARROW: Increase gravity to left edge of the window
-DOWN ARROW: Increase gravity to bottom edge of the window
-RIGHT ARROW: Increase gravity to right edge of the window
+- ESC: Closes the window
+- UP ARROW: Increase gravity to top edge of the window
+- LEFT ARROW: Increase gravity to left edge of the window
+- DOWN ARROW: Increase gravity to bottom edge of the window
+- RIGHT ARROW: Increase gravity to right edge of the window
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Hypixel - Bouncing Balls
