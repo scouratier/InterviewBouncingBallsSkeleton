@@ -17,14 +17,14 @@ typedef hmm_vec4 vec4;
 typedef hmm_quaternion quat;
 typedef hmm_mat4 mat4;
 
-std::string windowTitle = "Hypixel - Bouncing Balls";
-int windowWidth = 1000;
-int windowHeight = 400;
-int numBalls = 20;
-int minBallRadiusPx = 20;
-int maxBallRadiusPx = 30;
-float minBallVelocityPx = 70;
-float maxBallVelocityPx = 80;
+static const std::string windowTitle = "Hypixel - Bouncing Balls";
+static const int windowWidth = 1000;
+static const int windowHeight = 400;
+static const int numBalls = 20;
+static const int minBallRadiusPx = 20;
+static const int maxBallRadiusPx = 30;
+static const unsigned int minBallVelocityPx = 70;
+static const unsigned int maxBallVelocityPx = 80;
 
 hmm_vec2 gravity = HMM_Vec2(0, 0);
 
@@ -56,18 +56,18 @@ void input(sf::RenderWindow &window, std::vector<Circle>& allCircles) {
                     break;
                 case sf::Keyboard::Left:
                     // update UI
-                    gravity.X = gravity.X - 0.001;
+                    gravity.X = gravity.X - 0.001f;
                     break;
                 case sf::Keyboard::Right:
                     // update UI
-                    gravity.X = gravity.X + 0.001;
+                    gravity.X = gravity.X + 0.001f;
                     break;
                 case sf::Keyboard::Up:
                     // update UI
-                    gravity.Y = gravity.Y - 0.001;
+                    gravity.Y = gravity.Y - 0.001f;
                     break;
                 case sf::Keyboard::Down:
-                    gravity.Y = gravity.Y + 0.001;
+                    gravity.Y = gravity.Y + 0.001f;
                     // update UI
                     break;
             default:

@@ -14,10 +14,10 @@ Circle::Circle() {
     this->gravityVector = HMM_Vec2(0, 0);
 }
 
-Circle::Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, int minVelocity, int maxVelocity) {
-    this->color.R = rand() % 255;
-    this->color.G = rand() % 255;
-    this->color.B = rand() % 255;
+Circle::Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, unsigned int minVelocity, unsigned int maxVelocity) {
+    this->color.R = static_cast<float>(rand() % 255);
+    this->color.G = static_cast<float>(rand() % 255);
+    this->color.B = static_cast<float>(rand() % 255);
 
     // make a rand between 0.0 and 1.0, multiple it by 2 and substract 1
     // this should give me -1 to 1 randoms for X and Y for direction
@@ -32,12 +32,12 @@ Circle::Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, int
     this->RandomSize(minRadius, maxRadius);
 
     // Calculate the initial momentum
-    this->velocity = this->direction * speed;
+    this->velocity = this->direction * static_cast<float>(speed);
 
     // place the circle, keep it away from the edges
     // this should work with this->size*2, but I still get circle on bottom and right edge
-    this->position.X = rand() % (rectangleX - this->size) + this->size;
-    this->position.Y = rand() % (rectangleY - this->size) + this->size;
+    this->position.X = static_cast<float>(rand() % (rectangleX - this->size) + this->size);
+    this->position.Y = static_cast<float>(rand() % (rectangleY - this->size) + this->size);
     
     this->gravityVector = HMM_Vec2(0, 0);
 
@@ -47,7 +47,7 @@ Circle::~Circle() {
 
 }
 
-int Circle::GetSize() {
+unsigned int Circle::GetSize() {
     return this->size;
 }
 

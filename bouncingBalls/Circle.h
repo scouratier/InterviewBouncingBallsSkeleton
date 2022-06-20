@@ -3,10 +3,10 @@
 class Circle {
 public:
     Circle();
-    Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, int minVelocity, int maxVelocity);
+    Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, unsigned int minVelocity, unsigned int maxVelocity);
     ~Circle();
 
-    int             GetSize();
+    unsigned int    GetSize();
     hmm_vec2        GetPosition();
     hmm_vec3        GetColor();
     unsigned int    GetSpeed();
@@ -21,7 +21,7 @@ public:
     bool            SetGravityVector(hmm_vec2 currentGravity);
     bool            ResetGravitySpeed();
     bool            SetVelocity(hmm_vec2 in);
-    bool            RandomSize(unsigned int min, unsigned int max);
+    bool            RandomSize(unsigned int min, unsigned int );
 
 private:
     unsigned int    size;
