@@ -13,7 +13,6 @@ public:
     hmm_vec2        GetDirection();
     hmm_vec2        GetGravityVector();
     hmm_vec2        GetVelocity();
-    hmm_vec2        GetMomentum();
 
     bool            SetPosition(float X, float Y);
     bool            SetPosition(hmm_vec2 in);
@@ -22,7 +21,6 @@ public:
     bool            SetGravityVector(hmm_vec2 currentGravity);
     bool            ResetGravitySpeed();
     bool            SetVelocity(hmm_vec2 in);
-    bool            SetMomentum(hmm_vec2 in);
 
 private:
     int             size;
@@ -31,6 +29,5 @@ private:
     unsigned int    speed;
     hmm_vec2        direction;
     hmm_vec2        velocity;
-    hmm_vec2        momentum;
     hmm_vec2        gravityVector;
 };
