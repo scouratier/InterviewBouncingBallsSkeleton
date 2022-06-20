@@ -39,6 +39,11 @@ void randomizeSizes(std::vector<Circle>& allCircles)
     }
 }
 
+/*******************************************************************************************************************/
+/* Inputs:                                                                                                         */
+/* F1: Changes size of circles                                                                                     */
+/* Arrows change gravity towards that direction                                                                    */
+/*******************************************************************************************************************/
 void input(sf::RenderWindow &window, std::vector<Circle>& allCircles) {
     sf::Event event;
 
@@ -269,7 +274,10 @@ int main() {
     // Start the time
     sf::Clock clock;
 
+    /****************************/
+    /* Init the data structures */
     // make our vector that will hold the circles
+    /****************************/
     std::vector<Circle> allCircles;
     int i;
     // Fill in the array with Circles
@@ -280,6 +288,9 @@ int main() {
         allCircles.push_back(tempCircle);
     }
 
+    /****************************/
+    /* Main Loop                */
+    /****************************/
     while (window.isOpen()) {
         input(window, allCircles);
         sf::Time elapsed = clock.getElapsedTime();
