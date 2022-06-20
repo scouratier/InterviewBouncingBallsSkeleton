@@ -47,7 +47,7 @@ Circle::~Circle() {
 
 }
 
-unsigned int Circle::GetSize() {
+int Circle::GetSize() {
     return this->size;
 }
 

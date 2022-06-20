@@ -6,7 +6,7 @@ public:
     Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, unsigned int minVelocity, unsigned int maxVelocity);
     ~Circle();
 
-    unsigned int    GetSize();
+    int    GetSize();
     hmm_vec2        GetPosition();
     hmm_vec3        GetColor();
     unsigned int    GetSpeed();
@@ -21,7 +21,7 @@ public:
     bool            SetGravityVector(hmm_vec2 currentGravity);
     bool            ResetGravitySpeed();
     bool            SetVelocity(hmm_vec2 in);
-    bool            RandomSize(unsigned int min, unsigned int );
+    bool            RandomSize(unsigned int min, unsigned int max);
 
 private:
     unsigned int    size;

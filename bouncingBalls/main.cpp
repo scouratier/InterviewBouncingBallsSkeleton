@@ -23,8 +23,8 @@ static const int windowHeight = 400;
 static const int numBalls = 20;
 static const int minBallRadiusPx = 20;
 static const int maxBallRadiusPx = 30;
-static const unsigned int minBallVelocityPx = 70;
-static const unsigned int maxBallVelocityPx = 80;
+static const float minBallVelocityPx = 70;
+static const float maxBallVelocityPx = 80;
 
 hmm_vec2 gravity = HMM_Vec2(0, 0);
 
@@ -250,6 +250,7 @@ void draw(sf::RenderWindow& window,std::vector<Circle> allCircles) {
         // move this to a utility function
         sf::CircleShape shape(itr->GetSize());
         shape.setFillColor(sf::Color(itr->GetColor().R, itr->GetColor().G, itr->GetColor().B));
+        // Move the origin of the circle from top left to center
         shape.setOrigin(shape.getRadius(), shape.getRadius());
         shape.setPosition(itr->GetPosition().X, itr->GetPosition().Y);
         window.draw(shape);
