@@ -6,7 +6,7 @@ public:
     Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, unsigned int minVelocity, unsigned int maxVelocity);
     ~Circle();
 
-    int    GetSize();
+    int             GetSize();
     hmm_vec2        GetPosition();
     hmm_vec3        GetColor();
     unsigned int    GetSpeed();
