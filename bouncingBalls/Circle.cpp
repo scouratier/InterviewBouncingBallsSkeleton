@@ -29,11 +29,12 @@ Circle::Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, int
     // Get a random speed
     this->speed = (rand() % (maxVelocity - minVelocity)) + minVelocity;;
 
-    // Calculate the initial momentum
-    this->momentum = this->direction * speed;
-
     // Make the circle a random size
     this->size = (rand() % (maxRadius - minRadius)) + minRadius;
+
+    // Calculate the initial momentum
+    this->velocity = this->direction * speed;
+    this->momentum = this->direction * speed * size;    
 
 
     // place the circle, keep it away from the edges
@@ -73,6 +74,10 @@ hmm_vec2 Circle::GetGravityVector() {
     return this->gravityVector;
 }
 
+hmm_vec2 Circle::GetVelocity() {
+    return this->velocity;
+}
+
 hmm_vec2 Circle::GetMomentum() {
     return this->momentum;
 }
@@ -105,6 +110,11 @@ bool Circle::SetGravityVector(hmm_vec2 currentGravity) {
 
 bool Circle::ResetGravitySpeed() {
     this->gravityVector = HMM_Vec2(0, 0);
+    return true;
+}
+
+bool Circle::SetVelocity (hmm_vec2 in) {
+    this->velocity = in;
     return true;
 }
 
