@@ -21,9 +21,10 @@ public:
     bool            SetGravityVector(hmm_vec2 currentGravity);
     bool            ResetGravitySpeed();
     bool            SetVelocity(hmm_vec2 in);
+    bool            RandomSize(unsigned int min, unsigned int max);
 
 private:
-    int             size;
+    unsigned int    size;
     hmm_vec2        position;
     hmm_vec3        color;
     unsigned int    speed;

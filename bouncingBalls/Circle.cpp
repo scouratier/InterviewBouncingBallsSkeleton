@@ -29,7 +29,7 @@ Circle::Circle(int minRadius, int maxRadius, int rectangleY, int rectangleX, int
     this->speed = (rand() % (maxVelocity - minVelocity)) + minVelocity;;
 
     // Make the circle a random size
-    this->size = (rand() % (maxRadius - minRadius)) + minRadius;
+    this->RandomSize(minRadius, maxRadius);
 
     // Calculate the initial momentum
     this->velocity = this->direction * speed;
@@ -108,5 +108,11 @@ bool Circle::ResetGravitySpeed() {
 
 bool Circle::SetVelocity (hmm_vec2 in) {
     this->velocity = in;
+    return true;
+}
+
+bool Circle::RandomSize(unsigned int min, unsigned int max) {
+    // Make the circle a random size
+    this->size = (rand() % (max - min)) + min;
     return true;
 }
